@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="layui/css/layui.css" />
+		<script src="http://cdn.bootcss.com/jquery/1.12.3/jquery.min.js"></script>
+		<script src="layui/layui.js"></script>
+		<script src="layui/lay/modules/laytpl.js"></script>
+	</head>
+
+	<body>
+		//第一步：编写模版。你可以使用一个script标签存放模板，如：
+		<script id="demo" type="text/html">
+			<h3>{{ d.title }}</h3>
+			<ul>
+				{{# layui.each(d.list, function(index, item){ }}
+				<li>
+					<span>{{ item.modname }}</span>
+					<span>{{ item.alias }}：</span>
+					<span>{{ item.site || '' }}</span>
+				</li>
+				{{# }); }} {{# if(d.list.length === 0){ }} 无数据 {{# } }}
+			</ul>
+		</script>
+		//第二步：建立视图。用于呈现渲染结果。
+		<div id="view"></div>
+		<script>
+			$(function() {
+				layui.use('laytpl', function() {
+					var laytpl = layui.laytpl;
+
+					//使用方式	跟独立组件完全一样
+					laytpl('{{ d.name }}是一位公猿').render({
+						name: '贤心'
+					}, function(string) {
+						console.log(string); //贤心是一位公猿
+					});
+
+					//第三步：渲染模版
+					var data = {
+						"title": "Layui常用模块",
+						"list": [{
+							"modname": "弹层",
+							"alias": "layer",
+							"site": "layer.layui.com"
+						}, {
+							"modname": "表单",
+							"alias": "form"
+						}]
+					}
+					var getTpl = demo.innerHTML;
+					laytpl(getTpl).render(data, function(html) {
+						view.innerHTML = html;
+					});
+				});
+			});
+		</script>
+	</body>
+
+</html>

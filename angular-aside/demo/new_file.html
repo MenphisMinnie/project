@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html ng-app="asideApp">
+
+	<head>
+		<link rel="stylesheet" href="../../angular-ui-bootstrap/assets/lib/bootstrap-v3.3.7/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="../dist/css/angular-aside.css" />
+		<script src="https://code.angularjs.org/1.4.7/angular.js"></script>
+		<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.14.3.min.js"></script>
+		<script src="https://rawgit.com/dbtek/angular-aside/master/dist/js/angular-aside.js"></script>
+		<script src="controller.js"></script>
+	</head>
+
+	<body ng-controller="MainCtrl" ng-class="asideState.position">
+		<div id="content">
+			<div class="jumbotron panel panel-default">
+				<h2>Demo</h2>
+				<p>
+					<span class="pull-left">
+            <button type="button" class="btn btn-default btn-lg" ng-click="openAside('left', true)">
+              <span class="glyphicon glyphicon-align-justify"></span> Left
+					</button>
+					<button type="button" class="btn btn-default btn-lg" ng-click="openAside('top', true)">
+              Up <span class="glyphicon glyphicon-arrow-down"></span>
+            </button>
+					</span>
+					<span class="pull-right">
+            <button type="button" class="btn btn-default btn-lg" ng-click="openAside('bottom', true)">
+              Down <span class="glyphicon glyphicon-arrow-up"></span>
+					</button>
+					<button type="button" class="btn btn-default btn-lg" ng-click="openAside('right', false)">
+              Right <span class="glyphicon glyphicon-align-justify"></span>
+            </button>
+					</span>
+				</p>
+				<div class="clearfix"></div>
+				<br />
+				<!-- plunk-hr -->
+				<div class="text-center">
+					<ins class="adsbygoogle text-center" style="display:inline-block;width:320px;height:100px" data-ad-client="ca-pub-7616772085785107" data-ad-slot="4180012826"></ins>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>
+<script type="text/ng-template" id="aside.html">
+	<div class="modal-header">
+		<h3 class="modal-title">ngAside</h3>
+	</div>
+	<div class="modal-body">
+		Look i'm in aside.
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-primary" ng-click="ok($event)">OK</button>
+		<button class="btn btn-warning" ng-click="cancel($event)">Cancel</button>
+	</div>
+</script>

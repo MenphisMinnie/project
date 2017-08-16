@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<link href="lib/bootstrap/dist/css/bootstrap.css" />
+		<script type="text/javascript" src="lib/jquery/dist/jquery.min.js"></script>
+		<style type="text/css">
+			html body {
+				margin: 0px;
+				padding: 0px;
+			}
+			
+			.container-total-body {
+				position: relative;
+				padding-top: 45px;
+				padding-left: 210px;
+			}
+			
+			.container-total-body .c-nav-left {
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				height: 100%;
+				width: 210px;
+				background-color: red;
+			}
+			
+			.container-total-body .c-nav-right {
+				background-color: yellow;
+				height: 100%;
+			}
+			
+			.container-total-body .c-nav-top {
+				background-color: #DDDDDD;
+				height: 45px;
+				width: 100%;
+				margin-top: -45px;
+			}
+			/**
+			 * 小于1000px 触发增加class===container-nav-sm
+			 */
+			
+			.container-nav-sm.container-total-body {
+				padding-left: 120px;
+			}
+			
+			.container-nav-sm.container-total-body .c-nav-left {
+				width: 120px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="container-fluid container-total-body">
+			<div class="row c-nav-top">
+				<!--顶部-->
+				top
+			</div>
+			<div class="c-nav-left">
+				<!--左侧-->
+				left
+			</div>
+			<div class="row c-nav-right">
+				<!--右侧-->
+				right
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		$(function() {
+			initAuto();
+			$(window).resize(function() {
+				initAuto();
+				if($(window).width() < 1000) {
+					$('.container-total-body').addClass('container-nav-sm');
+				} else {
+					$('.container-total-body').removeClass('container-nav-sm');
+				}
+			});
+
+			function initAuto() {
+				$('.container-total-body').height($(window).height());
+			}
+		});
+	</script>
+
+</html>

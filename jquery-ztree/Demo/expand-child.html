@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link href="../lib/ztree/css/zTreeStyle/zTreeStyle.css" />
+		<script src="../lib/jquery/dist/jquery.min.js"></script>
+		<script src="../lib/ztree/js/jquery.ztree.all.js"></script>
+	</head>
+
+	<body>
+		<div style="width: 500px; height: 500px;">
+			<ul id="treeDemo" class="ztree"></ul>
+		</div>
+	</body>
+	<script>
+		$(function() {
+			var setting = {
+				view: {
+					selectedMulti: false
+				},
+				async: {
+					enable: true,
+					url: "json/parent.json",
+					autoParam: ["id", "name=n", "level=lv"],
+					otherParam: {
+						"otherParam": "zTreeAsyncTest"
+					},
+					dataFilter: filter,
+					type: "get"
+				},
+				callback: {
+//					beforeClick: beforeClick,
+//					beforeAsync: beforeAsync,
+//					onAsyncError: onAsyncError,
+//					onAsyncSuccess: onAsyncSuccess
+				}
+			};
+
+			var zNodes = [{
+				name: "父节点1 - 展开",
+				open: true,
+				children: [{
+					name: "父节点11 - 折叠",
+					children: [{
+						name: "叶子节点111"
+					}, {
+						name: "叶子节点112"
+					}, {
+						name: "叶子节点113"
+					}, {
+						name: "叶子节点114"
+					}]
+				}, {
+					name: "父节点12 - 折叠",
+					children: [{
+						name: "叶子节点121"
+					}, {
+						name: "叶子节点122"
+					}, {
+						name: "叶子节点123"
+					}, {
+						name: "叶子节点124"
+					}]
+				}, {
+					name: "父节点13 - 没有子节点",
+					isParent: true
+				}]
+			}, {
+				name: "父节点2 - 折叠",
+				children: [{
+					name: "父节点21 - 展开",
+					open: true,
+					children: [{
+						name: "叶子节点211"
+					}, {
+						name: "叶子节点212"
+					}, {
+						name: "叶子节点213"
+					}, {
+						name: "叶子节点214"
+					}]
+				}, {
+					name: "父节点22 - 折叠",
+					children: [{
+						name: "叶子节点221"
+					}, {
+						name: "叶子节点222"
+					}, {
+						name: "叶子节点223"
+					}, {
+						name: "叶子节点224"
+					}]
+				}, {
+					name: "父节点23 - 折叠",
+					children: [{
+						name: "叶子节点231"
+					}, {
+						name: "叶子节点232"
+					}, {
+						name: "叶子节点233"
+					}, {
+						name: "叶子节点234"
+					}]
+				}]
+			}, {
+				name: "父节点3 - 没有子节点",
+				isParent: true
+			}];
+
+			$(document).ready(function() {
+				$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+			});
+
+			function filter(treeId, parentNode, childNodes) {
+				if(!childNodes) return null;
+				for(var i = 0, l = childNodes.length; i < l; i++) {
+					childNodes[i].name = childNodes[i].name.replace(/\.n/g, '.');
+				}
+				return childNodes;
+			}
+
+			function beforeClick(treeId, treeNode) {
+				console.log(treeId);
+				console.log(treeNode);
+				return true;
+			};
+
+			function beforeAsync(treeId, treeNode) {
+				console.log(treeId);
+				console.log(treeNode);
+				return true;
+			};
+
+			function onAsyncError(event, treeId, treeNode, XMLHttpRequest, textStatus, errorThrown) {
+				console.log(XMLHttpRequest);
+			};
+
+			function onAsyncSuccess(event, treeId, treeNode, msg) {
+				console.log(eval('('+msg+')'));
+			};
+		});
+	</script>
+
+</html>
